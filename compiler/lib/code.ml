@@ -55,6 +55,8 @@ end
 module Var : sig
   type t [@@ocaml.immediate]
 
+  val sexp_of_t : t -> Sexplib0.Sexp.t
+
   val print : Format.formatter -> t -> unit
 
   val equal : t -> t -> bool
@@ -131,6 +133,8 @@ module Var : sig
 end = struct
   module T = struct
     type t = int
+
+    let sexp_of_t x = Sexplib0.Sexp.Atom (Printf.sprintf "v%d" x)
 
     let compare : t -> t -> int = compare
 

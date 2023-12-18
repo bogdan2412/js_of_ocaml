@@ -365,7 +365,7 @@ and binding_property =
 
 and function_body = statement_list
 
-and program = statement_list
+and program = statement_list [@@deriving sexp_of]
 
 and export =
   | ExportVar of variable_declaration_kind * variable_declaration list
@@ -405,7 +405,7 @@ and import_kind =
   (* import defaultname from "fname" *)
   | SideEffect (* import "fname" *)
 
-and program_with_annots = (statement_list * (Js_token.Annot.t * Parse_info.t) list) list
+type program_with_annots = (statement_list * (Js_token.Annot.t * Parse_info.t) list) list
 
 val compare_ident : ident -> ident -> int
 

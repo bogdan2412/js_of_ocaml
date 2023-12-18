@@ -48,6 +48,8 @@ end
 module Var : sig
   type t [@@ocaml.immediate]
 
+  val sexp_of_t : t -> Sexplib0.Sexp.t
+
   val print : Format.formatter -> t -> unit
 
   val equal : t -> t -> bool

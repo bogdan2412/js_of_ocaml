@@ -135,6 +135,31 @@ jobs:
           clean: true
           target-folder: doc/dev/
 
+
+  js-parser:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set-up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Set-up OCaml 4.14.x
+        uses: ocaml/setup-ocaml@v2
+        with:
+          ocaml-compiler: 4.14.x
+          allow-prerelease-opam: true
+          dune-cache: true
+
+      - run: opam install sedlex menhir
+      - run: rm compiler/tests-js-parser/test262/package.json
+      - run: opam exec -- dune build @runtest-parser --profile release
+
   lint-fmt:
     runs-on: ubuntu-latest
     steps:

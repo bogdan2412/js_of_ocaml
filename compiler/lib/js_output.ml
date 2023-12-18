@@ -120,15 +120,24 @@ struct
                ; ori_name = get_name_index nm
                })
 
+  let ident_or_pseudo_kw f name =
+    match Js_token.is_keyword name with
+    | None | Some _ when true ->
+        PP.string f name
+    | Some _ | None ->
+        PP.string f "(";
+        PP.string f name;
+        PP.string f ")"
+
   let ident f = function
     | S { name = Utf8 name; var = Some v; _ } ->
         output_debug_info_ident f name (Code.Var.get_loc v);
         if false then PP.string f (Printf.sprintf "/* %d */" (Code.Var.idx v));
-        PP.string f name
+        ident_or_pseudo_kw f name
     | S { name = Utf8 name; var = None; loc = Pi pi } ->
         output_debug_info_ident f name (Some pi);
-        PP.string f name
-    | S { name = Utf8 name; var = None; loc = U | N } -> PP.string f name
+        ident_or_pseudo_kw f name
+    | S { name = Utf8 name; var = None; loc = U | N } -> ident_or_pseudo_kw f name
     | V v ->
         assert accept_unnamed_var;
         PP.string f ("<" ^ Code.Var.to_string v ^ ">")

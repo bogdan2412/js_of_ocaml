@@ -187,8 +187,8 @@ let rec check_toks
   | (ta, _) :: _ra, [] ->
       Error (Printf.sprintf "token mismatch %s vs <EOF>\n" (Js_token.to_string ta))
 
-let to_file p =
-  let s = p_to_string p in
+let to_file p = 
+  let s = Javascript.sexp_of_program p |> Sexplib0.Sexp.to_string in
   let f, oc = Filename.open_temp_file "as" "WE" in
   output_string oc s;
   output_string oc "\n";

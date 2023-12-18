@@ -18,9 +18,12 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *)
 open! Stdlib
+module Sexp = Sexplib0.Sexp
 
 module Num : sig
   type t
+
+  val sexp_of_t : t -> Sexp.t
 
   (** Conversions *)
 
@@ -49,6 +52,8 @@ module Num : sig
   val neg : t -> t
 end = struct
   type t = string
+
+  let sexp_of_t x = Sexp.Atom x
 
   let of_string_unsafe s = s
 
@@ -146,9 +151,19 @@ module Label = struct
     | L of Code.Var.t
     | S of Utf8_string.t
 
+  let sexp_of_t = function
+    | S (Utf8 s) -> Sexp.Atom s
+    | L c -> Code.Var.sexp_of_t c
+
   let fresh () = L (Code.Var.fresh ())
 
   let of_string s = S s
+end
+
+module Parse_info = struct
+  include Parse_info
+
+  let sexp_of_t _ = Sexp.List []
 end
 
 type location =
@@ -156,7 +171,16 @@ type location =
   | N
   | U
 
-type identifier = Utf8_string.t
+let sexp_of_location _ = Sexp.Atom "loc"
+
+module Utf8_string = struct
+  include Utf8_string
+
+  let sexp_of_t = function
+    | Utf8_string.Utf8 s -> Sexp.Atom s
+end
+
+type identifier = Utf8_string.t [@@deriving sexp_of]
 
 type ident_string =
   { name : identifier
@@ -164,10 +188,28 @@ type ident_string =
   ; loc : location
   }
 
+let sexp_of_ident_string x = sexp_of_identifier x.name
+
+let sexp_of_list f l = Sexp.List (List.map l ~f)
+
+let sexp_of_option f o =
+  match o with
+  | None -> Sexp.List []
+  | Some x -> Sexp.List [ f x ]
+
+let sexp_of_bool b = Sexp.Atom (string_of_bool b)
+
+let sexp_of_string s = Sexp.Atom s
+
 type early_error =
   { loc : Parse_info.t
   ; reason : string option
   }
+
+let sexp_of_early_error x =
+  match x.reason with
+  | None -> Sexp.Atom "early_error"
+  | Some s -> Sexp.Atom (Printf.sprintf "early_error: %s" s)
 
 type ident =
   | S of ident_string
@@ -447,7 +489,7 @@ and binding_property =
 
 and function_body = statement_list
 
-and program = statement_list
+and program = statement_list [@@deriving sexp_of]
 
 and export =
   | ExportVar of variable_declaration_kind * variable_declaration list
@@ -487,7 +529,7 @@ and import_kind =
   (* import defaultname from "fname" *)
   | SideEffect (* import "fname" *)
 
-and program_with_annots = (statement_list * (Js_token.Annot.t * Parse_info.t) list) list
+type program_with_annots = (statement_list * (Js_token.Annot.t * Parse_info.t) list) list
 
 let compare_ident t1 t2 =
   match t1, t2 with

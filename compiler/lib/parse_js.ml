@@ -418,7 +418,7 @@ let recover error_checkpoint previous_checkpoint =
   | Some (offending_token, offending_loc, rest) -> (
       match State.Cursor.last_token rest with
       | None -> error_checkpoint
-      | Some (last_token, _, _) -> (
+      | Some (last_token, last_token_loc, last_token_rest) -> (
           match offending_token with
           | T_VIRTUAL_SEMICOLON -> error_checkpoint
           (* contextually allowed as identifiers, namely await and yield; *)
@@ -459,6 +459,13 @@ let recover error_checkpoint previous_checkpoint =
                        previous_checkpoint
                        Js_token.T_VIRTUAL_SEMICOLON_EXPORT_DEFAULT ->
                   State.Cursor.insert_token rest semicolon dummy_loc |> State.try_recover
+              | (T_AWAIT | T_YIELD) as tok when acceptable previous_checkpoint dummy_ident
+                ->
+                  State.Cursor.replace_token
+                    last_token_rest
+                    (token_to_ident tok)
+                    last_token_loc
+                  |> State.try_recover
               | _ -> error_checkpoint)))
 
 let parse_aux the_parser (lexbuf : Lexer.t) =
