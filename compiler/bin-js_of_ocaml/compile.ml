@@ -46,19 +46,28 @@ let source_map_enabled = function
   | No_sourcemap -> false
   | Inline | File _ -> true
 
-let output_gen ~standalone ~custom_header ~build_info ~source_map output_file f =
+let output_gen
+    ~write_shapes
+    ~standalone
+    ~custom_header
+    ~build_info
+    ~source_map
+    output_file
+    f =
   let f chan k =
     let fmt = Pretty_print.to_out_channel chan in
     Driver.configure fmt;
     if standalone then header ~custom_header fmt;
     if Config.Flag.header () then jsoo_header fmt build_info;
     let sm, shapes = f ~standalone ~source_map (k, fmt) in
-    (match output_file with
-    | `Stdout -> ()
-    | `Name name ->
-        Shape.Store.save'
-          (Filename.remove_extension name ^ Shape.Store.ext)
-          (StringMap.bindings shapes));
+    (if write_shapes
+     then
+       match output_file with
+       | `Stdout -> ()
+       | `Name name ->
+           Shape.Store.save'
+             (Filename.remove_extension name ^ Shape.Store.ext)
+             (StringMap.bindings shapes));
     match source_map, sm with
     | No_sourcemap, _ | _, None -> ()
     | ((Inline | File _) as output), Some sm ->
@@ -164,6 +173,7 @@ let run
     ; keep_unit_names
     ; include_runtime
     ; shape_files
+    ; shapes = write_shapes
     } =
   let source_map_base = Option.map ~f:snd source_map in
   let source_map =
@@ -378,6 +388,7 @@ let run
         }
       in
       output_gen
+        ~write_shapes
         ~standalone:true
         ~custom_header
         ~build_info:(Build_info.create `Runtime)
@@ -426,6 +437,7 @@ let run
           in
           if times () then Format.eprintf "  parsing: %a@." Timer.print t1;
           output_gen
+            ~write_shapes
             ~standalone:true
             ~custom_header
             ~build_info:(Build_info.create `Exe)
@@ -464,6 +476,7 @@ let run
           in
           if times () then Format.eprintf "  parsing: %a@." Timer.print t1;
           output_gen
+            ~write_shapes
             ~standalone:false
             ~custom_header
             ~build_info:(Build_info.create `Cmo)
@@ -494,6 +507,7 @@ let run
                    failwith "use [-o dirname/] or remove [--keep-unit-names]"
              in
              output_gen
+               ~write_shapes
                ~standalone:false
                ~custom_header
                ~build_info:(Build_info.create `Runtime)
@@ -530,6 +544,7 @@ let run
                   t1
                   (Ocaml_compiler.Cmo_format.name cmo);
               output_gen
+                ~write_shapes
                 ~standalone:false
                 ~custom_header
                 ~build_info:(Build_info.create `Cma)
@@ -579,6 +594,7 @@ let run
             , shapes )
           in
           output_gen
+            ~write_shapes
             ~standalone:false
             ~custom_header
             ~build_info:(Build_info.create `Cma)

@@ -38,6 +38,7 @@ type t =
       ]
   ; target_env : Target_env.t
   ; shape_files : string list
+  ; shapes : bool
   ; (* toplevel *)
     dynlink : bool
   ; linkall : bool

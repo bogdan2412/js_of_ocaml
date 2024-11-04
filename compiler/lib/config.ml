@@ -102,6 +102,8 @@ module Flag = struct
 
   let es6 = o ~name:"es6" ~default:false
 
+  let shapes = o ~name:"shapes" ~default:false
+
   let load_shapes_auto = o ~name:"load-shapes-auto" ~default:false
 end
 
