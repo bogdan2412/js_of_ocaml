@@ -468,7 +468,7 @@ class find_function_declaration r n =
       super#statement s
   end
 
-let print_program p = print_string (program_to_string p)
+let print_program ?compact p = print_string (program_to_string ?compact p)
 
 let find_function program n =
   let r = ref [] in

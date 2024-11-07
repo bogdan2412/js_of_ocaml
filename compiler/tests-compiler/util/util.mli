@@ -65,7 +65,7 @@ val expression_to_string : ?compact:bool -> Javascript.expression -> string
 
 val print_file : string -> unit
 
-val print_program : Javascript.program -> unit
+val print_program : ?compact:bool -> Javascript.program -> unit
 
 val print_var_decl : Javascript.program -> string -> unit
 
