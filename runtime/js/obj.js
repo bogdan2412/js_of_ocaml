@@ -77,11 +77,21 @@ function caml_obj_with_tag(tag, x) {
 }
 
 //Provides: caml_obj_dup mutable (mutable)
-function caml_obj_dup(x) {
-  var l = x.length;
-  var a = new Array(l);
-  for (var i = 0; i < l; i++) a[i] = x[i];
-  return a;
+//Requires: MlInt64, caml_invalid_argument, caml_is_ml_bytes, caml_is_ml_string
+function caml_obj_dup (x) {
+  if (x instanceof Array) {
+    var l = x.length;
+    var a = new Array(l);
+    for(var i = 0; i < l; i++ ) a[i] = x[i];
+    return a;
+  } else if (caml_is_ml_bytes(x) || caml_is_ml_string(x)) {
+    return x.slice();
+  } else if (x instanceof MlInt64) {
+    return x.copy();
+  } else if (typeof x == "number") {
+    return x;
+  }
+  caml_invalid_argument("Obj.dup");
 }
 
 //Provides: caml_obj_truncate (mutable, const)
