@@ -7,6 +7,7 @@ let name_of_ident = function
 let shake (p : Javascript.program) (keeps : StringSet.t) =
   let defines = Hashtbl.create 17 in
   let defines_rev = Hashtbl.create 17 in
+  let exports = Hashtbl.create 17 in
   let uses = Hashtbl.create 17 in
   let uses_rev = Hashtbl.create 17 in
   let keep = Hashtbl.create 17 in
@@ -15,6 +16,9 @@ let shake (p : Javascript.program) (keeps : StringSet.t) =
       let _ = free#program [ s, loc ] in
       let u = free#get_free in
       let define = free#get_def in
+      (match s with
+      | Export (_export, _) -> Hashtbl.add exports s define
+      | _ -> ());
       Hashtbl.add uses s u;
       Javascript.IdentSet.iter
         (fun u ->
@@ -45,6 +49,5 @@ let shake (p : Javascript.program) (keeps : StringSet.t) =
       let using = Hashtbl.find uses st in
       Javascript.IdentSet.iter (fun s -> mark_live (name_of_ident s)) using)
   in
-
   StringSet.iter mark_live keeps;
   List.concat_map p ~f:(fun (s, loc) -> if Hashtbl.mem keep s then [ s, loc ] else [])
