@@ -37,8 +37,7 @@ let%expect_test _ =
      |}
   in
   shake p [ "a" ];
-  [%expect
-    {|
+  [%expect {|
       function a(){b();} function b(){}
       //end
     |}]

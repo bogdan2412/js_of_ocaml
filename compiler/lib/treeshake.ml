@@ -38,10 +38,10 @@ let shake (p : Javascript.program) (keeps : StringSet.t) =
         mark_live_st st;
         let l = Hashtbl.find_all uses_rev name in
         List.iter l ~f:(function
-            | Javascript.Function_declaration _
-            | Class_declaration _
-            | Javascript.Variable_statement _ -> ()
-            | s -> mark_live_st s)
+          | Javascript.Function_declaration _
+          | Class_declaration _
+          | Javascript.Variable_statement _ -> ()
+          | s -> mark_live_st s)
   and mark_live_st st =
     if not (Hashtbl.mem keep st)
     then (
@@ -50,4 +50,5 @@ let shake (p : Javascript.program) (keeps : StringSet.t) =
       Javascript.IdentSet.iter (fun s -> mark_live (name_of_ident s)) using)
   in
   StringSet.iter mark_live keeps;
-  List.concat_map p ~f:(fun (s, loc) -> if Hashtbl.mem keep s then [ s, loc ] else [])
+  List.filter_map p ~f:(fun (s, loc) ->
+      if Hashtbl.mem keep s then Some (s, loc) else None)
