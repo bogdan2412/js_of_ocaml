@@ -911,8 +911,16 @@ end = struct
   let copy t = { arr = Array.copy t.arr }
 
   let iter ~f t =
-    for i = 0 to size t do
-      if mem t i then f i
+    let rec loop f base x off =
+      if x <> 0
+      then (
+        if x land 1 <> 0 then f (base + off);
+        loop f base (x lsr 1) (succ off))
+    in
+    for b = 0 to Array.length t.arr - 1 do
+      let x = Array.unsafe_get t.arr b in
+      let base = Sys.int_size * b in
+      loop f base x 0
     done
 end
 
