@@ -59,6 +59,9 @@ let exe, args =
             | "wizard-fast" -> "wizeng.x86-64-linux", wizard_args @ common_args file argv
             | "wasmtime" -> "wasmtime", wasmtime_args @ common_args file argv
             | "wasmedge" -> "wasmedge", wasmedge_args @ common_args file argv
+            | "jsc" -> "jsc", argv
+            | "d8" -> "d8", argv
+            | "sm" -> "sm", argv
             | _ -> "node", extra_args_for_wasoo @ argv)
         | _ -> "node", extra_args_for_jsoo @ argv
       in
