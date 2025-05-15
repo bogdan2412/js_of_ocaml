@@ -82,7 +82,7 @@ jobs:
 
       - name: Install jsc
         run: |
-          jsvu -os=default --engines=javascriptcore
+          jsvu --os=default --engines=javascriptcore
           echo $HOME/.jsvu/bin >> $GITHUB_PATH
 
       - name: Test jsc
