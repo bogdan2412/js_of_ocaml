@@ -87,6 +87,8 @@ jobs:
 
       - name: Test jsc
         run: |
+          ls $HOME/.jsvu
+          ls $HOME/.jsvu/bin
           jsc -e 'print("test")'
 
       - name: Set-up OCaml ${{ matrix.ocaml-compiler }}
