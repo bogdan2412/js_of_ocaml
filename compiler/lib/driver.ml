@@ -65,6 +65,7 @@ let specialize_1 (p, info) =
   let return_values = Code.Var.Map.empty in
   Specialize.f
     ~function_arity:(fun f -> Specialize.function_arity ~return_values info f)
+    ~update_def:(fun x expr -> Flow.Info.update_def info x expr)
     p
 
 let specialize_js (p, info) =
@@ -97,7 +98,6 @@ let phi p =
 let ( +> ) f g x = g (f x)
 
 let map_fst4 f (x, y, z, t) = f x, y, z, t
-
 
 let collects_shapes ~shapes (p : Code.program) =
   if debug_shapes () || shapes
@@ -139,7 +139,6 @@ let collects_shapes ~shapes (p : Code.program) =
     map)
   else StringMap.empty
 
-
 let effects_and_exact_calls ~deadcode_sentinal ~shapes (profile : Profile.t) p =
   let fast =
     match Config.effects (), profile with
@@ -157,21 +156,27 @@ let effects_and_exact_calls ~deadcode_sentinal ~shapes (profile : Profile.t) p =
   in
   match Config.effects () with
   | `Cps | `Double_translation ->
-     if debug () then Format.eprintf "Effects...@.";
-     let shapes = collects_shapes ~shapes p in
-     let p, tramp, cps = Effects.f ~flow_info:info ~live_vars p in
-     let p = match Config.target () with
-           | `Wasm -> p
-           | `JavaScript -> Lambda_lifting.f p in
-     p, tramp, cps, shapes
+      if debug () then Format.eprintf "Effects...@.";
+      let shapes = collects_shapes ~shapes p in
+      let p, tramp, cps = Effects.f ~flow_info:info ~live_vars p in
+      let p =
+        match Config.target () with
+        | `Wasm -> p
+        | `JavaScript -> Lambda_lifting.f p
+      in
+      p, tramp, cps, shapes
   | `Disabled | `Jspi ->
       let p =
-        Specialize.f ~function_arity:(fun f -> Global_flow.function_arity info f) p
+        Specialize.f
+          ~function_arity:(fun f -> Global_flow.function_arity info f)
+          ~update_def:(fun x expr -> Global_flow.update_def info x expr)
+          p
       in
       let shapes = collects_shapes ~shapes p in
       ( p
       , (Code.Var.Set.empty : Effects.trampolined_calls)
-      , (Code.Var.Set.empty : Effects.in_cps), shapes )
+      , (Code.Var.Set.empty : Effects.in_cps)
+      , shapes )
 
 let print p =
   if debug () then Code.Print.program Format.err_formatter (fun _ _ -> "") p;
@@ -644,7 +649,6 @@ let simplify_js js =
   if times () then Format.eprintf "  optimizing: %a@." Timer.print t;
   js
 
-
 let configure formatter =
   let pretty = Config.Flag.pretty () in
   Pretty_print.set_compact formatter (not pretty)
@@ -673,7 +677,7 @@ let optimize ~shapes ~profile p =
        | O2 -> o2
        | O3 -> o3)
     +> specialize_js_once_after
-    +> effects_and_exact_calls ~deadcode_sentinal ~shapes profile 
+    +> effects_and_exact_calls ~deadcode_sentinal ~shapes profile
     +> map_fst4
          (match Config.target (), Config.effects () with
          | `JavaScript, `Disabled -> Generate_closure.f
