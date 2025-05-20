@@ -1,5 +1,6 @@
 
 //# unitInfo: Provides: CamlinternalFormatBasics
+//# shape: CamlinternalFormatBasics:[F(2),F(1),F(2)]
 (function
   (globalThis){
    "use strict";
@@ -349,6 +350,7 @@
 
 //# unitInfo: Provides: Stdlib
 //# unitInfo: Requires: CamlinternalFormatBasics
+//# shape: Stdlib:[F(1),F(1),N,N,N,N,N,N,N,N,N,N,N,N,N,F(2)*,F(2)*,F(1)*,N,N,F(1)*,N,N,N,N,N,N,F(2)*,F(1),F(1)*,F(1)*,F(1),F(1)*,F(1),F(1),F(1),F(2),N,N,N,F(1),F(1),F(1),F(1),F(1),F(1),F(1),F(1),F(1),F(1),F(1),F(1),F(1),F(1),F(1),F(1),F(1),F(1),F(1),F(1),F(1),F(3),F(1),F(1),F(2),F(2),F(2),F(4),F(4),F(2),F(2),F(2),F(2),F(1),F(1),F(1),F(1),F(2),F(1),F(1),F(3),F(1),F(1),F(4),F(4),F(2),F(1),F(1),F(1),F(2),F(1),F(1),F(1),F(1),F(2),N,F(1)*,F(2),F(1),F(1),F(1),F(4),F(1),N]
 (function
   (globalThis){
    "use strict";
@@ -979,7 +981,9 @@
   (globalThis));
 
 //# unitInfo: Provides: Stdlib__Either
-(function(globalThis){
+//# shape: Stdlib__Either:[F(1)*,F(1)*,F(1)*,F(1)*,F(1)*,F(1)*,F(2),F(2),F(3),F(3),F(3),F(3),F(4),F(4)]
+(function
+  (globalThis){
    "use strict";
    var runtime = globalThis.jsoo_runtime;
    function caml_call1(f, a0){
@@ -1095,6 +1099,7 @@
 
 //# unitInfo: Provides: Stdlib__Sys
 //# unitInfo: Requires: Stdlib
+//# shape: Stdlib__Sys:[N,F(1),N,N,[N],N,N,N,N,N,N,N,N,N,F(2)*,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,F(1)*,N,N,N,F(1),F(1),[F(2)*]]
 (function
   (globalThis){
    "use strict";
@@ -1202,6 +1207,7 @@
 
 //# unitInfo: Provides: Stdlib__Obj
 //# unitInfo: Requires: Stdlib, Stdlib__Sys
+//# shape: Stdlib__Obj:[F(1)*,F(2),F(3),N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,[F(1),F(1)*,F(1)*],N]
 (function
   (globalThis){
    "use strict";
@@ -1379,6 +1385,7 @@
 
 //# unitInfo: Provides: Stdlib__Type
 //# unitInfo: Requires: Stdlib__Obj
+//# shape: Stdlib__Type:[[F(1)*,F(1),F(2)*]]
 (function
   (globalThis){
    "use strict";
@@ -1411,7 +1418,9 @@
   (globalThis));
 
 //# unitInfo: Provides: Stdlib__Atomic
-(function(globalThis){
+//# shape: Stdlib__Atomic:[F(1)*,F(1),F(1),F(2),F(2),F(3),F(2),F(1),F(1)]
+(function
+  (globalThis){
    "use strict";
    var
     runtime = globalThis.jsoo_runtime,
@@ -1448,6 +1457,7 @@
 
 //# unitInfo: Provides: CamlinternalLazy
 //# unitInfo: Requires: Stdlib, Stdlib__Obj
+//# shape: CamlinternalLazy:[N,F(1),F(2)]
 (function
   (globalThis){
    "use strict";
@@ -1524,6 +1534,7 @@
 
 //# unitInfo: Provides: Stdlib__Lazy
 //# unitInfo: Requires: CamlinternalLazy, Stdlib, Stdlib__Obj
+//# shape: Stdlib__Lazy:[N,F(2)*,F(1),F(1),F(2),F(1),F(1)]
 (function
   (globalThis){
    "use strict";
@@ -1619,6 +1630,7 @@
 
 //# unitInfo: Provides: Stdlib__Seq
 //# unitInfo: Requires: CamlinternalLazy, Stdlib, Stdlib__Atomic, Stdlib__Lazy
+//# shape: Stdlib__Seq:[F(1),F(1),F(1),F(2),F(3),F(2),F(3),F(2),F(2),F(2),F(2),F(2),F(2),F(3),F(4),F(3),F(3),F(3),F(3),F(1)*,F(2)*,F(3)*,F(2),F(3),F(2)*,F(2),F(2),F(2)*->F(1)*,F(3),F(2)*->F(1),F(3),F(3),F(3)*->F(1)*,F(2),F(2),F(3),F(3),F(3),F(1)->F(1),N,F(1)->F(1),F(2),F(3),F(2),F(3),F(3),F(3),F(4),F(3),F(4),F(2)*,F(3)*->F(1),F(1)*,F(1)*,F(2)*,F(2)*,F(1)*->F(1),F(1)*->F(1),F(2)*]
 (function
   (globalThis){
    "use strict";
@@ -2544,6 +2556,7 @@
 
 //# unitInfo: Provides: Stdlib__Option
 //# unitInfo: Requires: Stdlib, Stdlib__Seq
+//# shape: Stdlib__Option:[N,F(1)*,F(2)*,F(1),F(2),F(1)*,F(2),F(3),F(2),F(1)*,F(1)*,F(3),F(3),F(2)*,F(1)*,F(1)]
 (function
   (globalThis){
    "use strict";
@@ -2669,6 +2682,7 @@
 
 //# unitInfo: Provides: Stdlib__Result
 //# unitInfo: Requires: Stdlib, Stdlib__Seq
+//# shape: Stdlib__Result:[F(1)*,F(1)*,F(2)*,F(1),F(1),F(2),F(1)*,F(2),F(2),F(3),F(2),F(2),F(1)*,F(1)*,F(4),F(4),F(1)*,F(1)*,F(1)]
 (function
   (globalThis){
    "use strict";
@@ -2835,7 +2849,9 @@
   (globalThis));
 
 //# unitInfo: Provides: Stdlib__Bool
-(function(globalThis){
+//# shape: Stdlib__Bool:[F(1)*,F(2)*,F(2)*,F(1)*,F(1)*,F(1)*,F(2)*,F(1)*]
+(function
+  (globalThis){
    "use strict";
    var runtime = globalThis.jsoo_runtime, caml_hash = runtime.caml_hash;
    function equal(_b_, _a_){return _b_ === _a_ ? 1 : 0;}
@@ -2873,6 +2889,7 @@
 
 //# unitInfo: Provides: Stdlib__Char
 //# unitInfo: Requires: Stdlib
+//# shape: Stdlib__Char:[F(1),F(1),F(1)*,F(1)*,F(2)*,F(2)*,F(2)*,F(1)*]
 (function
   (globalThis){
    "use strict";
@@ -2974,6 +2991,7 @@
 
 //# unitInfo: Provides: Stdlib__Uchar
 //# unitInfo: Requires: Stdlib
+//# shape: Stdlib__Uchar:[N,N,N,N,F(1),F(1),F(1)*,F(1),F(1)*,F(1)*,F(1)*,F(1)*,F(1),F(1)*,F(2)*,F(2)*,F(2)*,F(1)*,F(1)*,F(1)*,F(1)*,F(2)*,F(1)*,F(1),F(1)]
 (function
   (globalThis){
    "use strict";
@@ -3143,6 +3161,7 @@
 
 //# unitInfo: Provides: Stdlib__List
 //# unitInfo: Requires: Stdlib
+//# shape: Stdlib__List:[F(1),F(2),F(2),F(1)*,F(2)*,F(1),F(1),F(2),F(2),F(1),F(2),F(2),F(2),F(1),F(1),F(3),F(3),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(3),F(3),F(3),F(3),F(3),F(3),F(4),F(4),F(2),F(2),F(3),F(3),F(2),F(2),F(2),F(2),F(1)*->F(1),F(2),F(1)*->F(1),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(1),F(2),F(2),F(2),F(2),F(2),F(3),F(1)*->F(1)*,F(1)]
 (function
   (globalThis){
    "use strict";
@@ -4778,7 +4797,9 @@
   (globalThis));
 
 //# unitInfo: Provides: Stdlib__Int
-(function(globalThis){
+//# shape: Stdlib__Int:[N,N,N,F(1)*,N,N,F(1)*,F(2)*,F(2)*,F(2)*,F(2)*,F(1)*,F(2)*,F(1)*]
+(function
+  (globalThis){
    "use strict";
    var runtime = globalThis.jsoo_runtime, caml_hash = runtime.caml_hash;
    function abs(x){
@@ -4826,6 +4847,7 @@
 
 //# unitInfo: Provides: Stdlib__Bytes
 //# unitInfo: Requires: Stdlib, Stdlib__Char, Stdlib__Int, Stdlib__Seq, Stdlib__Sys, Stdlib__Uchar
+//# shape: Stdlib__Bytes:[F(2),F(2),N,F(1),F(1),F(1),F(3),F(3),F(3),F(4),F(5),F(5),F(2),F(2),F(2),F(2),F(2),F(2),F(3),F(3),F(2),F(2),F(1),F(1),F(2),F(2),F(2),F(2),F(3),F(3),F(3),F(3),F(2),F(3),F(3),F(1),F(1),F(1),F(1),F(2)*,F(2)*,F(2),F(2),F(1),F(1)*,F(2),F(1)*->F(1),F(1)*->F(1),F(1),F(2),F(3),F(1),F(2),F(3),F(1),F(2),F(3),F(1),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(3),F(3),F(3),F(3),F(3),F(3),F(3),F(3),F(3),F(3),F(3),F(3),F(3),F(3),F(1)]
 (function
   (globalThis){
    "use strict";
@@ -6387,6 +6409,7 @@
 
 //# unitInfo: Provides: Stdlib__String
 //# unitInfo: Requires: Stdlib, Stdlib__Bytes
+//# shape: Stdlib__String:[F(2),F(2),N,F(1),F(1),F(5),F(2),F(2)*,F(2)*,F(2)*,F(2),F(2),F(3),F(3),F(2),F(3),F(2),F(2),F(2),F(3),F(3),F(2),F(2),F(1),F(1),F(1),F(1),F(1),F(1),F(2),F(2),F(3),F(3),F(3),F(3),F(2),F(2),F(2),F(2),F(1),F(1),F(1),F(2),F(1),F(2),F(1),F(2),F(1),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(1),F(2),F(2),F(2),F(2),F(2),F(2)]
 (function
   (globalThis){
    "use strict";
@@ -6955,7 +6978,9 @@
   (globalThis));
 
 //# unitInfo: Provides: Stdlib__Unit
-(function(globalThis){
+//# shape: Stdlib__Unit:[F(2)*,F(2)*,F(1)*]
+(function
+  (globalThis){
    "use strict";
    var runtime = globalThis.jsoo_runtime, cst = "()";
    function equal(_a_, param){
@@ -6975,6 +7000,7 @@
 
 //# unitInfo: Provides: Stdlib__Marshal
 //# unitInfo: Requires: Stdlib, Stdlib__Bytes
+//# shape: Stdlib__Marshal:[F(3),F(5),F(1),F(2),F(2),N,F(2),F(2)]
 (function
   (globalThis){
    "use strict";
@@ -7055,6 +7081,7 @@
 
 //# unitInfo: Provides: Stdlib__Array
 //# unitInfo: Requires: Stdlib, Stdlib__Seq, Stdlib__String
+//# shape: Stdlib__Array:[F(2),F(3),F(3),F(2)*,F(1)*,F(3),F(1)*,F(4),F(5),F(1),F(1),F(2),F(2),F(2),F(2),F(2),F(2),F(3),F(3),F(3),F(3),F(3),F(2),F(2),F(3),F(3),F(2),F(2),F(2),F(2),F(2),F(2),F(1),F(2),F(2),F(2),F(2),F(2),F(1)*->F(1)*,F(1)*->F(1)*,F(1),[]]
 (function
   (globalThis){
    "use strict";
@@ -8028,6 +8055,7 @@
 
 //# unitInfo: Provides: Stdlib__Float
 //# unitInfo: Requires: Stdlib, Stdlib__Array, Stdlib__List, Stdlib__Seq
+//# shape: Stdlib__Float:[N,N,N,F(1)*,F(1)*,N,N,N,N,N,N,N,N,N,F(1)*,F(1)*,F(1)*,F(1)*,F(1),F(1),F(2)*,F(2)*,F(2)*,F(2)*,F(2)*,F(2)*,F(2)*,F(2)*,F(2)*,F(1)*,N,N]
 (function
   (globalThis){
    "use strict";
@@ -9137,6 +9165,7 @@
 
 //# unitInfo: Provides: Stdlib__Int32
 //# unitInfo: Requires: Stdlib, Stdlib__Sys
+//# shape: Stdlib__Int32:[N,N,N,F(2),F(2),F(1)*,F(1)*,F(1)*,N,N,F(1)*,F(1)*,F(1),F(1)*,F(2)*,F(2)*,F(2)*,F(2)*,F(2)*,F(2)*,F(1)*]
 (function
   (globalThis){
    "use strict";
@@ -9272,6 +9301,7 @@
 
 //# unitInfo: Provides: Stdlib__Int64
 //# unitInfo: Requires: Stdlib
+//# shape: Stdlib__Int64:[N,N,N,F(2),F(2),F(1)*,F(1)*,F(1)*,N,N,F(1)*,F(1)*,F(1),F(1)*,F(2)*,F(2)*,F(2)*,F(2)*,F(2)*,F(2)*,F(1)*]
 (function
   (globalThis){
    "use strict";
@@ -9420,6 +9450,7 @@
 
 //# unitInfo: Provides: Stdlib__Nativeint
 //# unitInfo: Requires: Stdlib, Stdlib__Sys
+//# shape: Stdlib__Nativeint:[N,N,N,F(2),F(2),F(1)*,F(1)*,F(1)*,N,N,N,F(1)*,F(1)*,F(1),F(1)*,F(2)*,F(2)*,F(2)*,F(2)*,F(2)*,F(2)*,F(1)*]
 (function
   (globalThis){
    "use strict";
@@ -9543,6 +9574,7 @@
 
 //# unitInfo: Provides: Stdlib__Lexing
 //# unitInfo: Requires: Stdlib, Stdlib__Bytes, Stdlib__Int, Stdlib__Sys
+//# shape: Stdlib__Lexing:[N,F(2)*,F(2),F(2)*,F(2),F(2),F(1)*,F(1),F(2),F(1)*,F(1)*,F(1)*,F(1)*,F(1),F(1),F(3),F(3),F(2),F(2),F(3),F(3)]
 (function
   (globalThis){
    "use strict";
@@ -9840,6 +9872,7 @@
 
 //# unitInfo: Provides: Stdlib__Parsing
 //# unitInfo: Requires: Stdlib, Stdlib__Array, Stdlib__Lexing, Stdlib__Obj
+//# shape: Stdlib__Parsing:[F(1),F(1),F(1),F(1),F(1),F(1),F(1),F(1),F(1),N,F(1),N,F(4),F(2),F(1),F(1)*]
 (function
   (globalThis){
    "use strict";
@@ -10098,6 +10131,7 @@
 
 //# unitInfo: Provides: Stdlib__Set
 //# unitInfo: Requires: Stdlib, Stdlib__List, Stdlib__Seq
+//# shape: Stdlib__Set:[F(1)*]
 (function
   (globalThis){
    "use strict";
@@ -11157,6 +11191,7 @@
 
 //# unitInfo: Provides: Stdlib__Map
 //# unitInfo: Requires: Stdlib, Stdlib__List, Stdlib__Seq
+//# shape: Stdlib__Map:[F(1)*]
 (function
   (globalThis){
    "use strict";
@@ -12200,6 +12235,7 @@
 
 //# unitInfo: Provides: Stdlib__Stack
 //# unitInfo: Requires: Stdlib__List, Stdlib__Seq
+//# shape: Stdlib__Stack:[N,F(1)*,F(2),F(1),F(1),F(1),F(1),F(1)*,F(1),F(1)*,F(1)*,F(1)*,F(2),F(3),F(1),F(2),F(1)]
 (function
   (globalThis){
    "use strict";
@@ -12336,6 +12372,7 @@
 
 //# unitInfo: Provides: Stdlib__Queue
 //# unitInfo: Requires: Stdlib__Seq
+//# shape: Stdlib__Queue:[N,F(1)*,F(2),F(2),F(1),F(1),F(1),F(1),F(1)*,F(1),F(1),F(1),F(1),F(1)*,F(1)*,F(2),F(3),F(2),F(1)*->F(1)*,F(2),F(1)]
 (function
   (globalThis){
    "use strict";
@@ -12552,6 +12589,7 @@
 
 //# unitInfo: Provides: Stdlib__Buffer
 //# unitInfo: Requires: Stdlib, Stdlib__Bytes, Stdlib__Seq, Stdlib__String, Stdlib__Sys
+//# shape: Stdlib__Buffer:[F(1)*,F(1),F(1),F(3),F(5),F(2),F(1)*,F(1),F(1),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(4),F(4),F(3),F(2),F(3),F(1)*->F(1),F(1)*->F(1),F(2),F(1),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2)]
 (function
   (globalThis){
    "use strict";
@@ -13203,7 +13241,9 @@
   (globalThis));
 
 //# unitInfo: Provides: Stdlib__Mutex
-(function(globalThis){
+//# shape: Stdlib__Mutex:[F(1),F(1),F(1),F(1),F(2)]
+(function
+  (globalThis){
    "use strict";
    var
     runtime = globalThis.jsoo_runtime,
@@ -13243,7 +13283,9 @@
   (globalThis));
 
 //# unitInfo: Provides: Stdlib__Condition
-(function(globalThis){
+//# shape: Stdlib__Condition:[F(1),F(2),F(1),F(1)]
+(function
+  (globalThis){
    "use strict";
    var
     runtime = globalThis.jsoo_runtime,
@@ -13260,6 +13302,7 @@
 
 //# unitInfo: Provides: Stdlib__Semaphore
 //# unitInfo: Requires: Stdlib, Stdlib__Condition, Stdlib__Mutex
+//# shape: Stdlib__Semaphore:[[F(1),F(1),F(1),F(1),F(1)*],[F(1),F(1),F(1),F(1)]]
 (function
   (globalThis){
    "use strict";
@@ -13369,6 +13412,7 @@
 
 //# unitInfo: Provides: Stdlib__Domain
 //# unitInfo: Requires: Stdlib, Stdlib__Array, Stdlib__Atomic, Stdlib__Condition, Stdlib__List, Stdlib__Mutex
+//# shape: Stdlib__Domain:[F(1),F(1),F(1)*,F(1),F(1),F(1),F(1),F(1),F(1),F(1),N]
 (function
   (globalThis){
    "use strict";
@@ -13647,6 +13691,7 @@
 
 //# unitInfo: Provides: CamlinternalFormat
 //# unitInfo: Requires: CamlinternalFormatBasics, Stdlib, Stdlib__Buffer, Stdlib__Bytes, Stdlib__Char, Stdlib__Int, Stdlib__String, Stdlib__Sys
+//# shape: CamlinternalFormat:[F(2),F(1),F(1),F(2),F(1),F(2)*,F(3),F(3),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(1)*,F(1),F(1),F(1),F(1),F(1),F(2),F(2)]
 (function
   (globalThis){
    "use strict";
@@ -20763,6 +20808,7 @@
 
 //# unitInfo: Provides: Stdlib__Printf
 //# unitInfo: Requires: CamlinternalFormat, Stdlib, Stdlib__Buffer
+//# shape: Stdlib__Printf:[F(2),F(1),F(1),F(1),F(2),F(2),F(2),F(3),F(3),F(2),F(3),F(3),F(2)]
 (function
   (globalThis){
    "use strict";
@@ -20879,6 +20925,7 @@
 
 //# unitInfo: Provides: Stdlib__Arg
 //# unitInfo: Requires: Stdlib, Stdlib__Array, Stdlib__Buffer, Stdlib__Int, Stdlib__List, Stdlib__Printf, Stdlib__String, Stdlib__Sys
+//# shape: Stdlib__Arg:[F(3),F(3),F(5),F(5),F(5),F(3),N,N,F(2),F(2),F(2),N,F(1),F(1),F(2),F(2)]
 (function
   (globalThis){
    "use strict";
@@ -21730,6 +21777,7 @@
 
 //# unitInfo: Provides: Stdlib__Printexc
 //# unitInfo: Requires: Stdlib, Stdlib__Atomic, Stdlib__Buffer, Stdlib__Obj, Stdlib__Printf
+//# shape: Stdlib__Printexc:[F(1),F(1),F(2),F(2),F(1),F(1),F(1),F(1),F(1),F(1),F(1)*,F(1)*,F(2),F(1),F(2),F(1),F(1),F(1),N,F(1)*,F(2),F(1),F(1),F(1),F(1),F(1)]
 (function
   (globalThis){
    "use strict";
@@ -22338,6 +22386,7 @@
 
 //# unitInfo: Provides: Stdlib__Fun
 //# unitInfo: Requires: Stdlib, Stdlib__Printexc
+//# shape: Stdlib__Fun:[F(2)*,F(3),F(3),F(2),F(2),N]
 (function
   (globalThis){
    "use strict";
@@ -22436,6 +22485,7 @@
 
 //# unitInfo: Provides: Stdlib__Gc
 //# unitInfo: Requires: Stdlib, Stdlib__Atomic, Stdlib__Domain, Stdlib__Fun, Stdlib__Printf, Stdlib__Sys
+//# shape: Stdlib__Gc:[F(1),F(1),F(2)*,F(2),F(1)*,F(1),F(1),F(1)*,F(1)*,N]
 (function
   (globalThis){
    "use strict";
@@ -22633,6 +22683,7 @@
 
 //# unitInfo: Provides: Stdlib__In_channel
 //# unitInfo: Requires: Stdlib, Stdlib__Bytes, Stdlib__Fun, Stdlib__Sys
+//# shape: Stdlib__In_channel:[N,F(1),F(1),F(3),F(2),F(2),F(4),F(1),F(1),F(1),F(1),F(1),F(2),F(1),F(1),F(4),F(4),F(4),F(4),F(3),N,N,N,F(2),F(1),F(1)]
 (function
   (globalThis){
    "use strict";
@@ -22989,6 +23040,7 @@
 
 //# unitInfo: Provides: Stdlib__Out_channel
 //# unitInfo: Requires: Stdlib, Stdlib__Fun
+//# shape: Stdlib__Out_channel:[N,N,F(1),F(1),F(3),F(2),F(2),F(4),F(1),F(1),F(2),F(2),F(2),F(2),F(4),F(4),F(4),F(1),F(1),N,N,N,F(2),F(1),F(2),F(1),F(1)]
 (function
   (globalThis){
    "use strict";
@@ -23101,6 +23153,7 @@
 
 //# unitInfo: Provides: Stdlib__Digest
 //# unitInfo: Requires: Stdlib, Stdlib__Bytes, Stdlib__Char, Stdlib__In_channel, Stdlib__Int, Stdlib__String
+//# shape: Stdlib__Digest:[F(2)*,F(2)*,F(1),F(1),F(3),F(3),F(2),F(1),F(2),F(1),F(1),F(1),F(1),N,N,N,N]
 (function
   (globalThis){
    "use strict";
@@ -23428,6 +23481,7 @@
 
 //# unitInfo: Provides: Stdlib__Bigarray
 //# unitInfo: Requires: Stdlib, Stdlib__Array, Stdlib__Sys
+//# shape: Stdlib__Bigarray:[N,N,N,N,N,N,N,N,N,N,N,N,N,N,F(1)*,N,N,N,N,N,N,N,F(1),F(1),F(1),F(1),F(2),F(1),F(2),F(3),F(4)]
 (function
   (globalThis){
    "use strict";
@@ -24060,6 +24114,7 @@
 
 //# unitInfo: Provides: Stdlib__Random
 //# unitInfo: Requires: Stdlib, Stdlib__Bigarray, Stdlib__Bytes, Stdlib__Digest, Stdlib__Domain, Stdlib__Int32, Stdlib__Int64, Stdlib__Nativeint, Stdlib__String, Stdlib__Sys
+//# shape: Stdlib__Random:[F(1),F(1),F(1),F(1),F(1),F(1),F(2),F(1),F(2),F(1),F(2),F(1),F(2),F(1),F(1),F(1),F(1),F(1),N,F(1),F(1),F(1)]
 (function
   (globalThis){
    "use strict";
@@ -24637,6 +24692,7 @@
 
 //# unitInfo: Provides: Stdlib__Hashtbl
 //# unitInfo: Requires: Stdlib, Stdlib__Array, Stdlib__Atomic, Stdlib__Domain, Stdlib__Int, Stdlib__Random, Stdlib__Seq, Stdlib__String, Stdlib__Sys
+//# shape: Stdlib__Hashtbl:[F(2),F(1),F(1),F(1),F(3),F(2),F(2),F(2),F(2),F(2),F(3),F(2),F(2),F(3),F(1)*,F(1),F(1),F(2),F(1),F(1)*->F(1),F(1),F(1),F(2),F(2),F(1),F(1)*,F(1)*,F(1)*,F(2)*,F(3)*,F(4)*]
 (function
   (globalThis){
    "use strict";
@@ -25752,6 +25808,7 @@
 
 //# unitInfo: Provides: Stdlib__Weak
 //# unitInfo: Requires: Stdlib, Stdlib__Array, Stdlib__Int, Stdlib__Obj, Stdlib__Sys
+//# shape: Stdlib__Weak:[F(1),F(1)*,F(3),F(2),F(2),F(2),F(4),F(5),F(1)]
 (function
   (globalThis){
    "use strict";
@@ -26326,6 +26383,7 @@
 
 //# unitInfo: Provides: Stdlib__Format
 //# unitInfo: Requires: CamlinternalFormat, Stdlib, Stdlib__Array, Stdlib__Buffer, Stdlib__Bytes, Stdlib__Domain, Stdlib__Int, Stdlib__List, Stdlib__Queue, Stdlib__Seq, Stdlib__Stack, Stdlib__String
+//# shape: Stdlib__Format:[F(2),F(1),F(2),F(1),F(2),F(1),F(2),F(1),F(2),F(1),F(2),F(1),F(2),F(1),F(4),F(3),F(2),F(1),F(3),F(2),F(5),F(4),F(2),F(1),F(2),F(1),F(2),F(1),F(2),F(1),F(2)*,F(2),F(1),F(2),F(1),F(3),F(2),F(3),F(2),F(1),F(2),F(1),F(2),F(1),F(2),F(1),N,F(2),F(1),F(2)*,F(1),F(2),F(1),F(2)*,F(1),F(1)*,F(3),F(2),F(3),F(2),F(2),F(1),F(2)*,F(1),F(2),F(1),F(2)*,F(1),F(2)*,F(1),F(2),F(1),F(2),F(1),F(2),F(1),F(2),F(1),F(3),F(2),F(2),F(1),F(2)*,F(1),N,F(2),F(1),F(2),F(1),F(2),F(1),F(2),F(1),F(2),F(1),F(2)*,F(1),F(2)*,F(1),F(2),F(1),F(3),F(2),F(2)*,F(1),F(2),F(1),F(2)*,F(1),F(2),F(1),F(2)*,F(1),F(1),F(1),N,F(1),N,F(1),F(1),N,F(1),N,F(1),F(1),F(2),F(2),F(1),F(1)*,F(1),F(1),F(1),F(2),F(1),F(5),F(4),F(4),F(4),F(2),F(4),F(4),F(4),F(1)*->F(1),F(1),F(1),F(1),F(1),F(1),F(2),F(3),F(2),F(3),F(2),F(2)]
 (function
   (globalThis){
    "use strict";
@@ -28552,6 +28610,7 @@
 
 //# unitInfo: Provides: Stdlib__Scanf
 //# unitInfo: Requires: CamlinternalFormat, CamlinternalFormatBasics, Stdlib, Stdlib__Buffer, Stdlib__Bytes, Stdlib__Int, Stdlib__Printf, Stdlib__String
+//# shape: Stdlib__Scanf:[N,N,F(2),F(2),F(2),F(2),F(1),F(1),F(3),F(3),F(3),F(3),F(2),F(1)]
 (function
   (globalThis){
    "use strict";
@@ -30768,6 +30827,7 @@
 
 //# unitInfo: Provides: Stdlib__Callback
 //# unitInfo: Requires: Stdlib, Stdlib__Obj
+//# shape: Stdlib__Callback:[F(2),F(2)]
 (function
   (globalThis){
    "use strict";
@@ -30791,6 +30851,7 @@
 
 //# unitInfo: Provides: CamlinternalOO
 //# unitInfo: Requires: Stdlib, Stdlib__Array, Stdlib__List, Stdlib__Map, Stdlib__Obj, Stdlib__Sys
+//# shape: CamlinternalOO:[F(1),F(1),F(2),F(3),F(2),F(2),F(2),F(2),F(2),F(3),F(2),F(4),F(1),F(2),N,F(1),F(1),F(6),F(2),F(3),F(1)*,F(1),F(1),F(2),F(2),F(3),F(2),F(2),N,F(1)*]
 (function
   (globalThis){
    "use strict";
@@ -31759,6 +31820,7 @@
 
 //# unitInfo: Provides: Stdlib__Oo
 //# unitInfo: Requires: CamlinternalOO
+//# shape: Stdlib__Oo:[F(1),F(1),F(1)]
 (function
   (globalThis){
    "use strict";
@@ -31777,6 +31839,7 @@
 
 //# unitInfo: Provides: CamlinternalMod
 //# unitInfo: Requires: CamlinternalLazy, CamlinternalOO, Stdlib, Stdlib__Obj
+//# shape: CamlinternalMod:[F(2),F(3)]
 (function
   (globalThis){
    "use strict";
@@ -31948,6 +32011,7 @@
 
 //# unitInfo: Provides: Stdlib__Dynarray
 //# unitInfo: Requires: CamlinternalOO, Stdlib, Stdlib__Array, Stdlib__Obj, Stdlib__Printf, Stdlib__Seq, Stdlib__Sys
+//# shape: Stdlib__Dynarray:[F(1)*,F(2),F(2),F(2),F(3),F(1)*,F(1)*,F(1),F(1),F(1),F(2),F(2),F(2),F(2),F(2),F(3),F(5),F(1),F(1),F(1),F(2),F(1),F(2),F(2),F(2),F(2),F(3),F(3),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(3),F(3),F(1),F(1),F(1),F(1),F(1),F(1),F(1)*,F(1),F(1)*,F(1)*,F(2),F(2),F(1),F(2),F(1)]
 (function
   (globalThis){
    "use strict";
@@ -33263,6 +33327,7 @@
 
 //# unitInfo: Provides: Stdlib__Ephemeron
 //# unitInfo: Requires: CamlinternalLazy, Stdlib, Stdlib__Array, Stdlib__Hashtbl, Stdlib__Int, Stdlib__List, Stdlib__Obj, Stdlib__Random, Stdlib__Seq, Stdlib__Sys
+//# shape: Stdlib__Ephemeron:[N,N,N]
 (function
   (globalThis){
    "use strict";
@@ -34523,6 +34588,7 @@
 
 //# unitInfo: Provides: Stdlib__Filename
 //# unitInfo: Requires: Stdlib, Stdlib__Buffer, Stdlib__Domain, Stdlib__List, Stdlib__Printf, Stdlib__Random, Stdlib__String, Stdlib__Sys
+//# shape: Stdlib__Filename:[N,N,N,F(2),F(1),F(1),F(2),F(2),F(2),F(1),F(1),F(1),F(1),F(1),N,F(3),F(5),F(4),F(1),F(1),F(1),F(5)]
 (function
   (globalThis){
    "use strict";
@@ -35531,6 +35597,7 @@
 
 //# unitInfo: Provides: Stdlib__Complex
 //# unitInfo: Requires: Stdlib, Stdlib__Float
+//# shape: Stdlib__Complex:[N,N,N,F(1)*,F(1)*,F(2)*,F(2)*,F(2)*,F(1)*,F(2)*,F(1)*,F(1)*,F(1)*,F(1)*,F(2)*,F(1)*,F(1)*,F(2)*]
 (function
   (globalThis){
    "use strict";
@@ -35669,6 +35736,7 @@
 
 //# unitInfo: Provides: Stdlib__ArrayLabels
 //# unitInfo: Requires: Stdlib__Array
+//# shape: Stdlib__ArrayLabels:[F(2),F(3),F(3),F(2)*,F(1)*,F(3),F(1)*,F(4),F(5),F(1),F(1),F(2),F(2),F(2),F(2),F(2),F(2),F(3),F(3),F(3),F(3),F(3),F(2),F(2),F(3),F(3),F(2),F(2),F(2),F(2),F(2),F(2),F(1),F(2),F(2),F(2),F(2),F(2),F(1)*->F(1)*,F(1)*->F(1)*,F(1),[]]
 (function
   (globalThis){
    "use strict";
@@ -35769,6 +35837,7 @@
 
 //# unitInfo: Provides: Stdlib__ListLabels
 //# unitInfo: Requires: Stdlib__List
+//# shape: Stdlib__ListLabels:[F(1),F(2),F(2),F(1)*,F(2)*,F(1),F(1),F(2),F(2),F(1),F(2),F(2),F(2),F(1),F(1),F(3),F(3),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(3),F(3),F(3),F(3),F(3),F(3),F(4),F(4),F(2),F(2),F(3),F(3),F(2),F(2),F(2),F(2),F(1)*->F(1),F(2),F(1)*->F(1),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(1),F(2),F(2),F(2),F(2),F(2),F(3),F(1)*->F(1)*,F(1)]
 (function
   (globalThis){
    "use strict";
@@ -35923,6 +35992,7 @@
 
 //# unitInfo: Provides: Stdlib__BytesLabels
 //# unitInfo: Requires: Stdlib__Bytes
+//# shape: Stdlib__BytesLabels:[F(2),F(2),N,F(1),F(1),F(1),F(3),F(3),F(3),F(4),F(5),F(5),F(2),F(2),F(2),F(2),F(2),F(2),F(3),F(3),F(2),F(2),F(1),F(1),F(2),F(2),F(2),F(2),F(3),F(3),F(3),F(3),F(2),F(3),F(3),F(1),F(1),F(1),F(1),F(2)*,F(2)*,F(2),F(2),F(1),F(1)*,F(2),F(1)*->F(1),F(1)*->F(1),F(1),F(2),F(3),F(1),F(2),F(3),F(1),F(2),F(3),F(1),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(3),F(3),F(3),F(3),F(3),F(3),F(3),F(3),F(3),F(3),F(3),F(3),F(3),F(3),F(1)]
 (function
   (globalThis){
    "use strict";
@@ -36113,6 +36183,7 @@
 
 //# unitInfo: Provides: Stdlib__StringLabels
 //# unitInfo: Requires: Stdlib__String
+//# shape: Stdlib__StringLabels:[F(2),F(2),N,F(1),F(1),F(5),F(2),F(2)*,F(2)*,F(2)*,F(2),F(2),F(3),F(3),F(2),F(3),F(2),F(2),F(2),F(3),F(3),F(2),F(2),F(1),F(1),F(1),F(1),F(1),F(1),F(2),F(2),F(3),F(3),F(3),F(3),F(2),F(2),F(2),F(2),F(1),F(1),F(1),F(2),F(1),F(2),F(1),F(2),F(1),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(2),F(1),F(2),F(2),F(2),F(2),F(2),F(2)]
 (function
   (globalThis){
    "use strict";
@@ -36258,6 +36329,7 @@
 
 //# unitInfo: Provides: Stdlib__MoreLabels
 //# unitInfo: Requires: Stdlib__Hashtbl, Stdlib__Map, Stdlib__Set
+//# shape: Stdlib__MoreLabels:[[F(2),F(1),F(1),F(1),F(3),F(2),F(2),F(2),F(2),F(2),F(3),F(2),F(2),F(3),F(1)*,F(1),F(1),F(2),F(1),F(1)*->F(1),F(1),F(1),F(2),F(2),F(1),F(1)*,F(1)*,F(1)*,F(2)*,F(3)*,F(4)*],[F(1)*],[F(1)*]]
 (function
   (globalThis){
    "use strict";
@@ -36274,7 +36346,9 @@
   (globalThis));
 
 //# unitInfo: Provides: Stdlib__StdLabels
-(function(globalThis){
+//# shape: Stdlib__StdLabels:[]
+(function
+  (globalThis){
    "use strict";
    var runtime = globalThis.jsoo_runtime, Stdlib_StdLabels = [0];
    runtime.caml_register_global(0, Stdlib_StdLabels, "Stdlib__StdLabels");
@@ -36285,6 +36359,7 @@
 //# unitInfo: Provides: Stdlib__Effect
 //# unitInfo: Requires: Stdlib, Stdlib__Callback, Stdlib__Printexc, Stdlib__Printf
 //# unitInfo: Effects_without_cps: true
+//# shape: Stdlib__Effect:[N,N,[F(2),F(2),F(3),F(3),F(3)],N]
 (function
   (globalThis){
    "use strict";
