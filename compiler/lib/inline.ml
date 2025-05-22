@@ -91,7 +91,7 @@ let collect_deps p closures =
 
 module Var_SCC = Strongly_connected_components.Make (Var)
 
-let visit_closures p ~live_vars f acc =
+let visit_closures p ~live_vars f ~cleanup acc =
   let closures = collect_closures p in
   let deps = collect_deps p closures in
   let scc = Var_SCC.connected_components_sorted_from_roots_to_leaf deps in
@@ -99,12 +99,17 @@ let visit_closures p ~live_vars f acc =
     let params, cont, enclosing_function = Var.Hashtbl.find closures g in
     f ~recursive ~enclosing_function ~current_function:(Some g) ~params ~cont acc
   in
+  let cleanup' l acc =
+    List.fold_left l ~init:acc ~f:(fun acc x ->
+        let _, (pc, _), _ = Var.Hashtbl.find closures x in
+        cleanup pc acc)
+  in
   let acc =
     Array.fold_left
       scc
       ~f:(fun acc group ->
         match group with
-        | Var_SCC.No_loop g -> f' false acc g
+        | Var_SCC.No_loop g -> f' false acc g |> cleanup' [ g ]
         | Has_loop l ->
             let set = Var.Set.of_list l in
             let deps' =
@@ -124,9 +129,14 @@ let visit_closures p ~live_vars f acc =
               scc
               ~f:(fun acc group ->
                 match group with
-                | Var_SCC.No_loop g -> f' true acc g
-                | Has_loop l -> List.fold_left ~f:(fun acc g -> f' true acc g) ~init:acc l)
-              ~init:acc)
+                | Var_SCC.No_loop g -> f' true acc g |> cleanup' [ g ]
+                | Has_loop l ->
+                    List.fold_left
+                      ~f:(fun acc g -> f' true acc g |> cleanup' [ g ])
+                      ~init:acc
+                      l)
+              ~init:acc
+            |> cleanup' l)
       ~init:acc
   in
   f
@@ -136,6 +146,7 @@ let visit_closures p ~live_vars f acc =
     ~params:[]
     ~cont:(p.start, [])
     acc
+  |> cleanup p.start
 
 (****)
 
@@ -409,7 +420,8 @@ and should_inline ~context info args =
       || Option.equal Var.equal info.enclosing_function context.current_function
       || (not !(context.has_closures))
          && Option.equal Var.equal info.enclosing_function context.enclosing_function
-  | `Wasm, _ | `JavaScript, `Double_translation -> true
+  | `JavaScript, `Double_translation -> true
+  | `Wasm, _ -> true
   | `JavaScript, `Jspi -> assert false)
   && (functor_like ~context info
      || (context.live_vars.(Var.idx info.f) = 1
@@ -461,7 +473,7 @@ let trace_inlining ~context info x args =
    with an initial continuation pointing to a block belonging to
    another function. This removes these closures. *)
 
-let remove_dead_closures_from_block ~live_vars p pc block =
+let remove_dead_closures_from_block ~live_vars block =
   let is_dead_closure i =
     match i with
     | Let (f, Closure _) ->
@@ -471,30 +483,27 @@ let remove_dead_closures_from_block ~live_vars p pc block =
   in
   if List.exists ~f:is_dead_closure block.body
   then
-    { p with
-      blocks =
-        Addr.Map.add
-          pc
-          { block with
-            body =
-              List.fold_left block.body ~init:[] ~f:(fun acc i ->
-                  match i, acc with
-                  | Event _, Event _ :: prev ->
-                      (* Avoid consecutive events (keep just the last one) *)
-                      i :: prev
-                  | _ -> if is_dead_closure i then acc else i :: acc)
-              |> List.rev
-          }
-          p.blocks
+    { block with
+      body =
+        List.fold_left block.body ~init:[] ~f:(fun acc i ->
+            match i, acc with
+            | Event _, Event _ :: prev ->
+                (* Avoid consecutive events (keep just the last one) *)
+                i :: prev
+            | _ -> if is_dead_closure i then acc else i :: acc)
+        |> List.rev
     }
-  else p
+  else block
 
 let remove_dead_closures ~live_vars p pc =
   Code.traverse
     { fold = fold_children }
     (fun pc p ->
       let block = Addr.Map.find pc p.blocks in
-      remove_dead_closures_from_block ~live_vars p pc block)
+      let block' = remove_dead_closures_from_block ~live_vars block in
+      if phys_equal block block'
+      then p
+      else { p with blocks = Addr.Map.add pc block' p.blocks })
     pc
     p.blocks
     p
@@ -612,7 +621,6 @@ let inline ~profile ~inline_count p ~live_vars =
            p.blocks
            p
        in
-       let p = remove_dead_closures ~live_vars p pc in
        let env =
          match current_function with
          | Some f ->
@@ -635,6 +643,9 @@ let inline ~profile ~inline_count p ~live_vars =
          | None -> context.env
        in
        { context with p; env })
+     ~cleanup:(fun pc context ->
+       let p = remove_dead_closures ~live_vars context.p pc in
+       { context with p })
      { profile
      ; p
      ; live_vars
