@@ -448,7 +448,9 @@ let f_once_before p =
   let blocks =
     Addr.Map.map (fun block -> { block with Code.body = loop [] block.body }) p.blocks
   in
-  { p with blocks }
+  let p = { p with blocks } in
+  Code.invariant p;
+  p
 
 let rec args_equal xs ys =
   match xs, ys with
@@ -491,5 +493,7 @@ let f_once_after p =
         (fun block -> { block with Code.body = List.map block.body ~f })
         p.blocks
     in
-    Deadcode.remove_unused_blocks { p with blocks }
+    let p = Deadcode.remove_unused_blocks { p with blocks } in
+    Code.invariant p;
+    p
   else p

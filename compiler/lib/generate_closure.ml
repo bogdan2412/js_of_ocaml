@@ -323,8 +323,11 @@ let f p : Code.program =
       (fun pc _ (blocks, free_pc) ->
         (* make sure we have the latest version *)
         let block = Addr.Map.find pc blocks in
-        let free_pc, blocks, body = rewrite_closures free_pc blocks block.body in
-        Addr.Map.add pc { block with body } blocks, free_pc)
+        if List.exists block.body ~f:(function (Let (_, Closure _)) -> true | _ -> false)
+        then 
+          let free_pc, blocks, body = rewrite_closures free_pc blocks block.body in
+          Addr.Map.add pc { block with body } blocks, free_pc
+        else blocks, free_pc)
       p.blocks
       (p.blocks, p.free_pc)
   in
