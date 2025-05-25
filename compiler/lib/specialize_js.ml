@@ -487,7 +487,7 @@ let f_once_after p =
     | i -> i
   in
   if first_class_primitives
-  then
+  then (
     let blocks =
       Addr.Map.map
         (fun block -> { block with Code.body = List.map block.body ~f })
@@ -495,5 +495,5 @@ let f_once_after p =
     in
     let p = Deadcode.remove_unused_blocks { p with blocks } in
     Code.invariant p;
-    p
+    p)
   else p
